@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
+:root {
+  scroll-behavior: smooth;
+  --primary: #4154f1;
+  --second: #717ff5;
+  --bgColor: #f6f9ff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+  background: var(--bgColor);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+a {
+  color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover {
+  color: var(--second);
+  text-decoration: none;
 }
 
-.App-link {
-  color: #61dafb;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nunito Sans", sans-serif;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.active {
+  background: rgba(209, 213, 219, 0.5);
+  opacity: 1;
 }
