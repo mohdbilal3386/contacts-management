@@ -69,18 +69,6 @@ const Sidebar: React.FC = () => {
         </div>
       </div>
 
-      <div className="lg:hidden fixed top-0 left-0 z-50">
-        <button
-          onClick={() => dispatch(toggleSidebar())}
-          className="p-4 text-gray-800 hover:text-blue-500"
-        >
-          {isOpen ? (
-            <XMarkIcon className="h-6 w-6 sm md: hidden" />
-          ) : (
-            <Bars3Icon className="h-6 w-6" />
-          )}
-        </button>
-      </div>
       <div
         className={`fixed inset-0 z-40 bg-gray-800 text-white transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -113,6 +101,25 @@ const Sidebar: React.FC = () => {
             </NavLink>
           </nav>
         </div>
+      </div>
+      <div className="lg:hidden p-4 flex  flex-grow justify-between items-center overflow-y-auto">
+        <h1
+          className={`text-2xl font-bold transition-opacity ${
+            isOpen ? "opacity-100" : " lg:hidden"
+          }`}
+        >
+          Contact Managment
+        </h1>
+        <button
+          onClick={() => dispatch(toggleSidebar())}
+          className=" text-gray-800 hover:text-blue-500"
+        >
+          {isOpen ? (
+            <XMarkIcon className="h-6 w-6 sm md: hidden" />
+          ) : (
+            <Bars3Icon className="h-6 w-6" />
+          )}
+        </button>
       </div>
     </>
   );

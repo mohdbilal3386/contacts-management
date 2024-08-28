@@ -6,12 +6,12 @@ const AppLayout = () => {
   const { isOpen } = useAppSelector((state) => state.sidebar);
 
   return (
-    <div className="flex h-screen bg-gray-200">
+    <div className="lg:flex h-screen bg-gray-200">
       <Sidebar />
       <main
-        className={`flex-1 ${
-          isOpen ? "ml-64" : "ml-20"
-        } p-4 transition-all duration-300`}
+        className={`flex-1  ${
+          isOpen ? "lg:ml-64" : "lg:ml-20"
+        } p-4 transition-all duration-300 `}
       >
         <Outlet />
       </main>
