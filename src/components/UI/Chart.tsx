@@ -9,17 +9,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { ChartProps } from "../../types/chartsType";
 
-const Chart: React.FC = () => {
-  const data = [
-    { name: "Jan", value: 4000 },
-    { name: "Feb", value: 3000 },
-    { name: "Mar", value: 2000 },
-    { name: "Apr", value: 2780 },
-    { name: "May", value: 1890 },
-    { name: "Jun", value: 2390 },
-    { name: "Jul", value: 3490 },
-  ];
+const Chart: React.FC<ChartProps> = ({ data = [], lines }) => {
   return (
     <div className="w-full h-80">
       <ResponsiveContainer>
@@ -40,13 +32,16 @@ const Chart: React.FC = () => {
           />
           <Tooltip contentStyle={{ backgroundColor: "#333", color: "#fff" }} />
           <Legend wrapperStyle={{ color: "#ccc" }} />
-          <Line
-            type="monotone"
-            dataKey="value"
-            stroke="#4a90e2"
-            dot={{ stroke: "#fff", strokeWidth: 2 }}
-            activeDot={{ r: 8 }}
-          />
+          {lines.map((line, index) => (
+            <Line
+              key={index}
+              type="monotone"
+              dataKey={line.key}
+              stroke={line.stroke}
+              name={line.name}
+              activeDot={{ r: 8, stroke: line.stroke, strokeWidth: 2 }}
+            />
+          ))}
         </LineChart>
       </ResponsiveContainer>
     </div>
