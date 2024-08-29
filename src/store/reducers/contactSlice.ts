@@ -26,7 +26,7 @@ export const contactSlice = createSlice({
         (contact) => contact.id !== action.payload
       );
     },
-    viewContact: (state, action: PayloadAction<number>) => {
+    viewContact: (state, action: PayloadAction<number | null>) => {
       state.selectedContact =
         state.contacts.find((contact) => contact.id === action.payload) || null;
     },

@@ -27,13 +27,13 @@ const Sidebar: React.FC = () => {
               isOpen ? "justify-between" : "justify-center"
             } px-3`}
           >
-            <h1
+            <h3
               className={`text-2xl font-bold transition-opacity ${
                 isOpen ? "opacity-100" : " lg:hidden"
               }`}
             >
               Contact Managment
-            </h1>
+            </h3>
             <div
               className={` text-gray-300 p-2 hover:bg-gray-700 rounded-md cursor-pointer 
               `}

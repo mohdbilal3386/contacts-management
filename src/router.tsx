@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "./components/layout/AppLayout";
 import ContactPage from "./pages/ContactPage";
 import MapsAndCharts from "./pages/MapsAndCharts";
-import CreateContactPage from "./pages/CreateContactPage";
+import ContactFormPage from "./pages/ContactFormPage";
 import ViewContactPage from "./pages/ViewContactPage";
 import store from "./store/store";
 import { viewContact } from "./store/reducers/contactSlice";
@@ -20,7 +20,16 @@ const router = createBrowserRouter([
       },
       {
         path: "create-contact",
-        element: <CreateContactPage />,
+        element: <ContactFormPage />,
+      },
+      {
+        path: "edit-contact/:id",
+        element: <ContactFormPage />,
+        loader: async ({ params }) => {
+          const dispatch = store.dispatch;
+          params.id && dispatch(viewContact(+params.id));
+          return null;
+        },
       },
       {
         path: "view-contact/:id",

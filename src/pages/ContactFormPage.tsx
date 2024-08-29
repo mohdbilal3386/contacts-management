@@ -1,71 +1,99 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../hooks/reduxHook";
-import { Contact } from "../types/contactTypes";
-import { addContact } from "../store/reducers/contactSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
+import {
+  addContact,
+  updateContact,
+  viewContact,
+} from "../store/reducers/contactSlice";
 
-// Validation Schema
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup
     .string()
     .email("Invalid email address")
     .required("Email is required"),
-  phone: yup
-    .string()
-    .matches(/^\+?[1-9]\d{1,14}$/, "Invalid phone number")
-    .required("Phone number is required"),
+  phone: yup.string().required("Phone number is required"),
   address: yup.string().required("Address is required"),
 });
 
-const CreateContactPage: React.FC = () => {
+const ContactFormPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const contactId = id ? parseInt(id) : -1;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { selectedContact } = useAppSelector((state) => state.contacts);
+
   const {
     register,
     handleSubmit,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: Contact) => {
-    const newContact = {
-      id: Date.now(),
-      ...data,
-    };
-    dispatch(addContact(newContact));
-    navigate("/");
+  useEffect(() => {
+    if (selectedContact) {
+      setValue("name", selectedContact.name);
+      setValue("email", selectedContact.email);
+      setValue("phone", selectedContact.phone);
+      setValue("address", selectedContact.address);
+    }
+  }, [selectedContact, setValue]);
+
+  const onSubmit = (data: any) => {
+    if (contactId === -1) {
+      const newCotact = {
+        id: new Date().getTime(),
+        ...data,
+      };
+      dispatch(addContact(newCotact));
+    } else {
+      dispatch(updateContact({ ...data, id: contactId }));
+    }
+
+    reset();
+    dispatch(viewContact(null));
+    navigate(-1);
   };
 
   return (
-    <div className="text-white bg-gray-800 p-6 h-full rounded-lg">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-4 flex flex-col"
-      >
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-semibold">Create Contact</h3>
-          <div className="flex space-x-2">
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="flex items-center bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
-            >
-              Submit
-            </button>
-          </div>
+    <div className="text-white bg-gray-800 p-6 h-full rounded-lg flex flex-col">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-semibold">
+          {contactId === -1 ? "Create Contact" : "Edit Contact"}
+        </h3>
+        <div className="flex space-x-4">
+          <button
+            onClick={() => {
+              reset();
+              dispatch(viewContact(null));
+              navigate("/");
+            }}
+            className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300"
+          >
+            Cancel
+          </button>
+          <button
+            form="contactForm"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+          >
+            Submit
+          </button>
         </div>
+      </div>
+      <form
+        id="contactForm"
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-4"
+      >
         <div>
           <label
             htmlFor="name"
@@ -148,4 +176,4 @@ const CreateContactPage: React.FC = () => {
   );
 };
 
-export default CreateContactPage;
+export default ContactFormPage;
