@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { ChartProps } from "../../types/chartsType";
+import { ChartProps } from "../../types/chartTypes";
 
 const Chart: React.FC<ChartProps> = ({ data = [], lines }) => {
   return (

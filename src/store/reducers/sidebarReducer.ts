@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SidebarState } from "../../types/sidebarTypes";
 
-interface sidebarProps {
-  isOpen: boolean;
-}
-const initialState: sidebarProps = {
+const initialState: SidebarState = {
   isOpen: true,
 };
 

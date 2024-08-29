@@ -1,25 +1,21 @@
+import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { Link } from "react-router-dom";
+import { useAppSelector } from "../../hooks/reduxHook";
 
 const Table: React.FC = () => {
-  const contacts = [
-    {
-      name: "John Doe",
-      email: "john.doe@example.com",
-      phone: "+1234567890",
-      address: "123 Main St, Anytown, USA",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      phone: "+0987654321",
-      address: "456 Oak St, Metropolis, USA",
-    },
-  ];
+  const { contacts } = useAppSelector((state) => state.contacts);
+
   return (
-    <div className="p-4 bg-gray-800 text-white rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Contact List</h2>
-      <div className="overflow-auto">
-        <table className=" table-auto min-w-full divide-y divide-gray-700">
+    <div className="overflow-auto h-full flex items-center justify-center">
+      {contacts.length === 0 ? (
+        <div className="text-center">
+          <h3 className="text-xl font-semibold mb-4">
+            No Contact Found. Please add contact from the Create Contact Button.
+          </h3>
+        </div>
+      ) : (
+        <table className="table-auto min-w-full divide-y divide-gray-700">
           <thead className="bg-gray-700">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
@@ -33,6 +29,9 @@ const Table: React.FC = () => {
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                 Address
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                Actions
               </th>
             </tr>
           </thead>
@@ -51,11 +50,28 @@ const Table: React.FC = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   {contact.address}
                 </td>
+                <td className="px-6 py-4 flex items-center whitespace-nowrap text-sm">
+                  <Link
+                    to={`/view-contact/${contact.id}`}
+                    className="text-green-500 hover:text-green-700"
+                  >
+                    <EyeIcon className="h-5 w-5" />
+                  </Link>
+                  <button className="text-blue-500 hover:text-blue-700 ml-2">
+                    <PencilIcon className="h-5 w-5" />
+                  </button>
+                  <button
+                    // onClick={() => handleDelete(contact.id)}
+                    className="text-red-500 hover:text-red-700 ml-2"
+                  >
+                    <TrashIcon className="h-5 w-5" />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      )}
     </div>
   );
 };

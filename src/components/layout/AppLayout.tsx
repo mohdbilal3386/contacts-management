@@ -1,9 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 import Sidebar from "../UI/Sidebar";
 import { useAppSelector } from "../../hooks/reduxHook";
+import Loader from "../UI/Loader";
 
 const AppLayout = () => {
   const { isOpen } = useAppSelector((state) => state.sidebar);
+  const navigation = useNavigation();
+
+  if (navigation.state === "loading") {
+    return <Loader />;
+  }
 
   return (
     <div className="lg:flex h-screen bg-gray-200">

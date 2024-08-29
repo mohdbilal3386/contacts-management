@@ -1,6 +1,8 @@
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { sidebarSlice } from "./reducers/sidebarReducer";
-const rootReducer = combineSlices(sidebarSlice);
+import { contactSlice } from "./reducers/contactSlice";
+
+const rootReducer = combineSlices(sidebarSlice, contactSlice);
 
 const store = configureStore({
   reducer: rootReducer,

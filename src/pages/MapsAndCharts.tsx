@@ -4,7 +4,7 @@ import { lazy, Suspense } from "react";
 import Chart from "../components/UI/Chart";
 import { useQuery } from "@tanstack/react-query";
 import { fetchChartData, fetchMapData } from "../apis";
-import { FormattedData, LineConfig } from "../types/chartsType";
+import { FormattedData, LineConfig } from "../types/chartTypes";
 import { CountryData } from "../types/mapTypes";
 import Loader from "../components/UI/Loader";
 const Map = lazy(() => import("../components/UI/Map"));

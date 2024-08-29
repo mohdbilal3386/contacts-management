@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CountryData } from "../types/mapTypes";
-import { ChartData, FormattedData } from "../types/chartsType";
+import { ChartData, FormattedData } from "../types/chartTypes";
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
