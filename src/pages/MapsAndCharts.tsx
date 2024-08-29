@@ -15,6 +15,8 @@ const lineConfigs: LineConfig[] = [
   { key: "recovered", stroke: "#4ae24a", name: "Recovered" },
 ];
 
+const staleTime: number = 10000; //in- milliseconds
+
 const MapsAndCharts = () => {
   const {
     data: chartData,
@@ -23,6 +25,7 @@ const MapsAndCharts = () => {
   } = useQuery<FormattedData[], Error>({
     queryKey: ["chartData"],
     queryFn: () => fetchChartData("/historical/all?lastdays=all"),
+    staleTime,
   });
 
   const {
@@ -32,6 +35,7 @@ const MapsAndCharts = () => {
   } = useQuery<CountryData[]>({
     queryKey: ["countries"],
     queryFn: () => fetchMapData("/countries"),
+    staleTime,
   });
 
   const isLoading = chartLoading || countriesLoading;
