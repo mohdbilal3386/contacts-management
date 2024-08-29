@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
             } px-3`}
           >
             <h3
-              className={`text-2xl font-bold transition-opacity ${
+              className={` font-bold transition-opacity ${
                 isOpen ? "opacity-100" : " lg:hidden"
               }`}
             >
