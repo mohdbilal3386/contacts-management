@@ -4,7 +4,6 @@ import { SidebarState } from "../../types/sidebarTypes";
 const initialState: SidebarState = {
   isOpen: true,
 };
-
 export const sidebarSlice = createSlice({
   name: "sidebar",
   initialState,
