@@ -6,11 +6,13 @@ import CreateContactPage from "./pages/CreateContactPage";
 import ViewContactPage from "./pages/ViewContactPage";
 import store from "./store/store";
 import { viewContact } from "./store/reducers/contactSlice";
+import Error404Page from "./pages/Error404Page";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <Error404Page />,
     children: [
       {
         path: "/",
