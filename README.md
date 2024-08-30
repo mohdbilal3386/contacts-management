@@ -46,6 +46,7 @@ The UI boasts a responsive design, ensuring seamless access and optimal viewing 
 
 ## Directory Structure
 
+```bash
 src/
 ├── components/ // Reusable components (e.g., Table)
 ├── pages/ // Main pages (e.g., CreateContactPage)
@@ -55,6 +56,7 @@ src/
 │ └── ... // Other store-related files
 └── App.tsx // Main application component
 └── index.tsx // Entry point for React
+```
 
 ## Setup and Installation
 
